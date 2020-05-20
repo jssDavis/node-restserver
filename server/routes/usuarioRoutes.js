@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const _ = require('underscore');
 
 const UsuarioModel = require('../models/usuarioModel');
+const { verificaToken, verificaAdminRole } = require('../middlewares/autentication');
 
 
 // =================Se incializan servicios==============
@@ -16,7 +17,14 @@ const app = express();
 
 // ----------------GET
 
-app.get('/usuario', function(req, res) {
+app.get('/usuario', verificaToken, function(req, res) {
+
+    // return res.json({
+    //     peticion: ' get usuario ',
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     email: req.usuario.email
+    // });
 
     let desde = req.query.desde || 0; //Los parametros opcionales vienen en el "query" de la peticion ejemplo: /usuario=desde=10
     desde = Number(desde);
@@ -51,7 +59,17 @@ app.get('/usuario', function(req, res) {
 
 
 // ----------------POST
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificaToken, verificaAdminRole], function(req, res) {
+
+    // return res.json({
+    //     peticion: ' post usuario ',
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     email: req.usuario.email
+    // });
+
+
+
     let body = req.body; //Se parsea con bodyParser como middleware
 
     let usuario = new UsuarioModel({
@@ -83,7 +101,15 @@ app.post('/usuario', function(req, res) {
 
 
 // ----------------PUT
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
+
+    // return res.json({
+    //     peticion: ' put usuario ',
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     email: req.usuario.email
+    // });
+
     let id = req.params.id;
     // let body = req.body; //Se parsea con bodyParser como middleware
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
@@ -153,7 +179,16 @@ app.put('/usuario/:id', function(req, res) {
 
 
 // ----------------DELETE LOGICO
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificaToken, verificaAdminRole], function(req, res) {
+
+    // return res.json({
+    //     peticion: ' delete usuario ',
+    //     usuario: req.usuario,
+    //     nombre: req.usuario.nombre,
+    //     email: req.usuario.email
+    // });
+
+
     let id = req.params.id;
     let cambiaEstado = {
         estado: false
