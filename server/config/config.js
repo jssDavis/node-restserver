@@ -39,3 +39,11 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+
+
+// ======================
+// Google Client ID
+// ======================
+
+process.env.CLIENT_ID = process.env.CLIENT_ID || '748366191767-td08894367hrtv0iaitd64t4mun2g28f.apps.googleusercontent.com';
