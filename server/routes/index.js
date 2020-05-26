@@ -12,6 +12,8 @@ const app = express();
 
 app.use(require('./usuarioRoutes.js'));
 app.use(require('./loginRoutes.js'));
+app.use(require('./categoriaRoutes.js'));
+app.use(require('./productoRoutes.js'));
 
 
 //Fin de codigo
