@@ -14,6 +14,8 @@ app.use(require('./usuarioRoutes.js'));
 app.use(require('./loginRoutes.js'));
 app.use(require('./categoriaRoutes.js'));
 app.use(require('./productoRoutes.js'));
+app.use(require('./uploadsRoutes.js'));
+app.use(require('./imagenesRoutes.js'));
 
 
 //Fin de codigo
